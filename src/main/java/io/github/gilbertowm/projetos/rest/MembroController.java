@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/membros")
+@CrossOrigin("http://localhost:4200")
 public class MembroController {
 
     private final MembroRepository repository;
@@ -24,6 +26,11 @@ public class MembroController {
     @ResponseStatus(HttpStatus.CREATED)
     public Membro salvar(@RequestBody @Valid Membro membro ){
         return repository.save(membro);
+    }
+
+    @GetMapping
+    public List<Membro> obterTodos(){
+        return repository.findAll();
     }
 
     @GetMapping("{id}")
